@@ -3,10 +3,9 @@
 <p align="center">
   Visualizing Sorting Algorithms
 </p>
-< p align="center">
-  ![alt test](pictures/screenshot.png)
-</p>
-  
+
+![alt test](pictures/screenshot.png)
+
   For our final project, we wanted to help new learners of Computer Science visualize sorting algorithms and their run times.
   In this repository, you will find the Python files that generate an animated bar graph that sorts itself based on thn
   algorithm used.
