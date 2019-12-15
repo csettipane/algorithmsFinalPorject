@@ -1,9 +1,51 @@
+
+
+1 of 2,806
+BogoSort button attempt
+Inbox
+x
+
+Calvin Settipane
+Attachments
+4:26 PM (1 hour ago)
+to me, Yindong, Brishti
+
+Hi all,
+Heres one of my attempts to add more buttons to the interface. Not working yet and not sure why.
+
+--
+Calvin Settipane
+
+Boston College, Class of 2021
+
+Computer Science
+
+Email: settipac@bc.edu
+
+Phone: 401-474-0364
+
+Attachments area
+
+Yindong Sun
+Attachments
+5:15 PM (13 minutes ago)
+to Calvin, me, Brishti
+
+Hi all,
+
+These are the finalized visualizations.
+
+Yin
+
+9 Attachments
+
 from tkinter import *
 import time
 import random
 listLength = 50
 height = 600
 width = 800
+time=0
 
 class SpagehttiSort():
     def __init__(self, mywin):
@@ -15,6 +57,7 @@ class SpagehttiSort():
         self.reset()
 
     def reset(self):
+        self.time=0
         # random array
         random.shuffle(self.list)
         self.drawRect(-1)
@@ -48,15 +91,18 @@ class SpagehttiSort():
             self.win.canvas.create_text(i * self.barwidth+self.left+self.barwidth/2,
                                   height-18-self.height * self.list[i],
                                   text=str(self.list[i]), tag="line")
+            self.win.canvas.create_text(400, 10, text=str(self.time),tag="line")
         self.win.canvas.after(100)
         self.win.canvas.update()
 
     def sort(self):
         for i in range(0,listLength):
+            self.time=i+1
             m=max(self.list)
             index=self.list.index(m)
             self.drawRect(index)
             self.list.pop(index)
+
 
 
 class SortWin():

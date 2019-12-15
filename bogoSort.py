@@ -4,6 +4,7 @@ import random
 listLength = 50
 height = 600
 width = 800
+time = 0
 
 class bogoSort():
     def __init__(self, mywin):
@@ -15,25 +16,26 @@ class bogoSort():
         self.reset()
 
     def reset(self):
+        self.time=0
         # random array
         # random.shuffle(self.list)
-        # self.drawRect(-1,0, 0)
+        # self.drawRect(-1,-1, 0)
 
         # reversed array 
         #self.list = [x for x in range(listLength, 0, -1)]
-        #self.drawRect(-1,0, 0)
+        #self.drawRect(-1,-1, 0)
 
         # rotated array
-        # self.list = [x for x in range(int(listLength/2), listLength+1)]+[x for x in range(1, int(listLength/2))]
-        # self.drawRect(-1,0, 0)
+        self.list = [x for x in range(int(listLength/2), listLength+1)]+[x for x in range(1, int(listLength/2))]
+        self.drawRect(-1,-1,0)
 
         # almost sorted array
-        i = random.randint(0,int(listLength/2))
-        j = random.randint(1+int(listLength/2),listLength)
-        temp=self.list[i]
-        self.list[i]=self.list[j]
-        self.list[j]=temp
-        self.drawRect(-1,0,0)
+        # i = random.randint(0,int(listLength/2))
+        # j = random.randint(1+int(listLength/2),listLength)
+        # temp=self.list[i]
+        # self.list[i]=self.list[j]
+        # self.list[j]=temp
+        # self.drawRect(-1,-1,0)
         
     def drawRect(self,move,flag,ordered):
         self.win.canvas.delete("line")
@@ -54,12 +56,14 @@ class bogoSort():
             self.win.canvas.create_text(i * self.barwidth+self.left+self.barwidth/2,
                                   height-18-self.height * self.list[i],
                                   text=str(self.list[i]), tag="line")
+            self.win.canvas.create_text(400, 10, text=str(self.time),tag="line")
         self.win.canvas.after(100)
         self.win.canvas.update()
 
     def isSorted(self):
         res = 1
         for i in range(0, len(self.list)-1):
+            self.time+=1
             self.drawRect(i,i+1,res)
             if self.list[i]>self.list[i+1]:
                     return 0
@@ -71,10 +75,11 @@ class bogoSort():
             temp = self.list[i]
             self.list[i] = self.list[j]
             self.list[j] = temp
-            self.drawRect(j,i,0)
+        self.drawRect(-1,-1,0)
             
     def sort(self):
-        while not(self.isSorted()):
+        while not (self.isSorted()):
+            self.time+=1
             self.drawRect(0,-1,-1)
             self.randomize()
             

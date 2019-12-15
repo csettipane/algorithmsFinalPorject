@@ -4,6 +4,7 @@ import random
 listLength = 50
 height = 600
 width = 800
+time=0
 
 class SelectionSort():
     def __init__(self, mywin):
@@ -15,9 +16,10 @@ class SelectionSort():
         self.reset()
 
     def reset(self):
+        self.time=0
         # random array
-        # random.shuffle(self.list)
-        # self.drawRect(-1,50, -1)
+        random.shuffle(self.list)
+        self.drawRect(-1,50, -1)
 
         # reversed array 
         # self.list = [x for x in range(listLength, 0, -1)]
@@ -28,12 +30,12 @@ class SelectionSort():
         # self.drawRect(-1,50, -1)
 
         # almost sorted array
-        i = random.randint(0,int(listLength/2))
-        j = random.randint(1+int(listLength/2),listLength)
-        temp=self.list[i]
-        self.list[i]=self.list[j]
-        self.list[j]=temp
-        self.drawRect(-1,50, -1)
+        # i = random.randint(0,int(listLength/2))
+        # j = random.randint(1+int(listLength/2),listLength)
+        # temp=self.list[i]
+        # self.list[i]=self.list[j]
+        # self.list[j]=temp
+        # self.drawRect(-1,50, -1)
 
     def drawRect(self,flag, move, min):
 
@@ -53,14 +55,17 @@ class SelectionSort():
             self.win.canvas.create_text(i * self.barwidth+self.left+self.barwidth/2,
                                   height-18-self.height * self.list[i],
                                   text=str(self.list[i]), tag="line")
+            self.win.canvas.create_text(400, 10, text=str(self.time),tag="line")
         self.win.canvas.after(100)
         self.win.canvas.update()
 
     def sort(self):
 
         for i in range(0,len(self.list)-1):
+            self.time+=1
             min=i
             for j in range(i+1,len(self.list)):
+                self.time+=1
                 if self.list[j] <self.list[min]:
                     min=j
                     self.drawRect(i,j+1,min)
@@ -68,7 +73,8 @@ class SelectionSort():
             self.list[min]=self.list[i]
             self.list[i]=temp
             self.drawRect(i+1,i+1,i)
-                
+        self.drawRect(len(self.list),-1,-1)
+
                 
 
 

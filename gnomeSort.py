@@ -4,6 +4,7 @@ import random
 listLength = 50
 height = 600
 width = 800
+time=0
 
 class GnomeSort():
     def __init__(self, mywin):
@@ -15,9 +16,10 @@ class GnomeSort():
         self.reset()
 
     def reset(self):
+        self.time=0
         # random array
-        # random.shuffle(self.list)
-        # self.drawRect(-1,-1,-1)
+        random.shuffle(self.list)
+        self.drawRect(-1,-1,-1)
 
         # reversed array 
         # self.list = [x for x in range(listLength, 0, -1)]
@@ -28,12 +30,12 @@ class GnomeSort():
         # self.drawRect(-1,-1,-1)
 
         # almost sorted array
-        i = random.randint(0,int(listLength/2))
-        j = random.randint(1+int(listLength/2),listLength)
-        temp=self.list[i]
-        self.list[i]=self.list[j]
-        self.list[j]=temp
-        self.drawRect(-1,-1,-1)
+        # i = random.randint(0,int(listLength/2))
+        # j = random.randint(1+int(listLength/2),listLength)
+        # temp=self.list[i]
+        # self.list[i]=self.list[j]
+        # self.list[j]=temp
+        # self.drawRect(-1,-1,-1)
 
     def drawRect(self,curr,next, flag):
 
@@ -53,6 +55,7 @@ class GnomeSort():
             self.win.canvas.create_text(i * self.barwidth+self.left+self.barwidth/2,
                                   height-18-self.height * self.list[i],
                                   text=str(self.list[i]), tag="line")
+            self.win.canvas.create_text(400, 10, text=str(self.time),tag="line")
         self.win.canvas.after(100)
         self.win.canvas.update()
 
@@ -61,17 +64,18 @@ class GnomeSort():
         n=len(self.list)
         self.drawRect(index,index+1, -1)
         while index<n:
+            self.time+=1
             if index==0:
                 index = index+1
             if self.list[index]>=self.list[index-1]:
                 index+=1
-                self.drawRect(index,index+1, -1)
+                self.drawRect(index,index+1, index)
             else:
                 temp = self.list[index]
                 self.list[index]=self.list[index-1]
                 self.list[index-1]=temp
                 index-=1
-                self.drawRect(index,index+1,-1)
+                self.drawRect(index,index+1,index)
         self.drawRect(-1,-1,len(self.list))
                 
 

@@ -4,6 +4,7 @@ import random
 listLength = 50
 height = 600
 width = 800
+time = 0
 
 class CountingSort():
     def __init__(self, mywin):
@@ -15,10 +16,10 @@ class CountingSort():
         self.reset()
 
     def reset(self):
-
+        self.time=0
         # random array
-        # random.shuffle(self.list)
-        # self.drawRect(-1,-1)
+        random.shuffle(self.list)
+        self.drawRect(-1,-1)
 
         # reversed array 
         # self.list = [x for x in range(listLength, 0, -1)]
@@ -29,12 +30,12 @@ class CountingSort():
         # self.drawRect(-1,-1)
 
         # almost sorted array
-        i = random.randint(0,int(listLength/2))
-        j = random.randint(1+int(listLength/2),listLength)
-        temp=self.list[i]
-        self.list[i]=self.list[j]
-        self.list[j]=temp
-        self.drawRect(-1,-1)
+        # i = random.randint(0,int(listLength/2))
+        # j = random.randint(1+int(listLength/2),listLength)
+        # temp=self.list[i]
+        # self.list[i]=self.list[j]
+        # self.list[j]=temp
+        # self.drawRect(-1,-1)
 
     def drawRect(self,move, flag):
 
@@ -52,6 +53,7 @@ class CountingSort():
             self.win.canvas.create_text(i * self.barwidth+self.left+self.barwidth/2,
                                   height-18-self.height * self.list[i],
                                   text=str(self.list[i]), tag="line")
+            self.win.canvas.create_text(400, 10, text=str(self.time),tag="line")
         self.win.canvas.after(100)
         self.win.canvas.update()
 
@@ -60,11 +62,14 @@ class CountingSort():
         count = [0]*m
         self.drawRect(0, -1)
         for i in range(0, len(self.list)):
+            self.time+=1
             count[self.list[i]]+=1
             self.drawRect(i+1,-1)
         index=0
         for j in range(m):
+            self.time+=1
             for k in range(count[j]):
+                self.time+=1
                 self.list[index]=j
                 self.drawRect(-1,j)
                 index+=1
