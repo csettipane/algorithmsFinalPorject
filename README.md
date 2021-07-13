@@ -1,4 +1,4 @@
-# algorithmsFinalPorject
+# algorithmsFinalProject
 
 <p align="center">
   Visualizing Sorting Algorithms
